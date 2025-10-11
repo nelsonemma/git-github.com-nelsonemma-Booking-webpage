@@ -1,88 +1,93 @@
-/* ====== NAV TOGGLE (mobile) ====== */
-const navToggle = document.getElementById('navToggle');
-const mainNav = document.getElementById('mainNav');
-const header = document.getElementById('siteHeader');
+// script.js - minimal, dependency-free
+(function(){
+  const PRICE = 60000;
+  const qtyInput = document.getElementById('qty');
+  const incr = document.getElementById('incr');
+  const decr = document.getElementById('decr');
+  const totalAmount = document.getElementById('total-amount');
+  const continueBtn = document.getElementById('continueBtn');
 
-navToggle.addEventListener('click', () => {
-  const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-  navToggle.setAttribute('aria-expanded', String(!expanded));
-  mainNav.classList.toggle('mobile-open');
-});
+  // Nav elements
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const navCloseBtn = document.getElementById('navCloseBtn');
+  const closePageBtn = document.getElementById('closePageBtn');
 
-/* Close mobile menu when clicking outside (nice UX) */
-document.addEventListener('click', (e) => {
-  if (window.innerWidth <= 720) {
-    if (!header.contains(e.target) && mainNav.classList.contains('mobile-open')) {
-      mainNav.classList.remove('mobile-open');
-      navToggle.setAttribute('aria-expanded', 'false');
+  function formatNumber(n){
+    return Number(n).toLocaleString('en-NG');
+  }
+
+  function updateTotal(){
+    let q = parseInt(qtyInput.value || 0, 10);
+    if (isNaN(q) || q < 0) q = 0;
+    const total = q * PRICE;
+    totalAmount.textContent = formatNumber(total);
+  }
+
+  incr.addEventListener('click', ()=> {
+    qtyInput.value = Math.max(0, (parseInt(qtyInput.value||0,10) + 1));
+    updateTotal();
+  });
+
+  decr.addEventListener('click', ()=> {
+    qtyInput.value = Math.max(0, (parseInt(qtyInput.value||0,10) - 1));
+    updateTotal();
+  });
+
+  qtyInput.addEventListener('input', ()=>{
+    let val = parseInt(qtyInput.value || 0, 10);
+    if (isNaN(val) || val < 0){ val = 0; }
+    qtyInput.value = val;
+    updateTotal();
+  });
+
+  // Continue / WhatsApp booking
+  continueBtn.addEventListener('click', ()=>{
+    const q = parseInt(qtyInput.value || 0, 10);
+    if (q === 0){
+      const message = encodeURIComponent(
+        `Hi! I'm interested in THE BIGGEST YACHT PARTY OF 2025. I would like more info about booking.`
+      );
+      window.open(`https://wa.me/2349047219373?text=${message}`, '_blank');
+      return;
     }
+    const total = q * PRICE;
+    const message = encodeURIComponent(
+      `Hello! I want to book ${q} ticket(s) for THE BIGGEST YACHT PARTY OF 2025. Total: ₦${total.toLocaleString('en-NG')}. Please share booking details.`
+    );
+    window.open(`https://wa.me/2349047219373?text=${message}`, '_blank');
+  });
+
+  // NAV open/close
+  function openNav(){
+    mobileNav.classList.add('open');
+    navBackdrop.classList.add('open');
+    mobileNav.setAttribute('aria-hidden','false');
+    navBackdrop.setAttribute('aria-hidden','false');
   }
-});
-
-/* ====== COUNTDOWN (live) ====== */
-/* Event start: 31 Dec 2025, 20:00 local time */
-const target = new Date(2025, 11, 31, 20, 0, 0); // months are 0-based (11 = Dec)
-
-const elDays = document.getElementById('cd-days');
-const elHours = document.getElementById('cd-hours');
-const elMins = document.getElementById('cd-mins');
-const elSecs = document.getElementById('cd-secs');
-
-function pad(n){ return n < 10 ? '0' + n : String(n); }
-
-function updateCountdown(){
-  const now = new Date();
-  let diff = target - now; // milliseconds
-  if (diff <= 0){
-    elDays.textContent = '00';
-    elHours.textContent = '00';
-    elMins.textContent = '00';
-    elSecs.textContent = '00';
-    clearInterval(countInterval);
-    return;
+  function closeNav(){
+    mobileNav.classList.remove('open');
+    navBackdrop.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden','true');
+    navBackdrop.setAttribute('aria-hidden','true');
   }
-  const secs = Math.floor(diff / 1000);
-  const days = Math.floor(secs / (24*3600));
-  const hours = Math.floor((secs % (24*3600)) / 3600);
-  const minutes = Math.floor((secs % 3600) / 60);
-  const seconds = secs % 60;
 
-  elDays.textContent = pad(days);
-  elHours.textContent = pad(hours);
-  elMins.textContent = pad(minutes);
-  elSecs.textContent = pad(seconds);
-}
-const countInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
+  menuBtn.addEventListener('click', openNav);
+  navBackdrop.addEventListener('click', closeNav);
+  navCloseBtn.addEventListener('click', closeNav);
 
-/* ====== TICKET / PRICE LOGIC ====== */
-const unitPrice = 59999;
-const ticketsInput = document.getElementById('tickets');
-const totalEl = document.getElementById('total-price');
-const unitPriceEl = document.getElementById('unit-price');
-const incrBtn = document.getElementById('qty-incr');
-const decrBtn = document.getElementById('qty-decr');
+  // optional: close button to go back (or you can hook it to close modal)
+  closePageBtn.addEventListener('click', ()=>{
+    if (window.history.length > 1) window.history.back();
+  });
 
-unitPriceEl.textContent = unitPrice.toLocaleString();
-function recalc(){
-  let q = parseInt(ticketsInput.value, 10);
-  if (!q || q < 1) q = 1;
-  ticketsInput.value = q;
-  const total = unitPrice * q;
-  totalEl.textContent = total.toLocaleString();
-}
-incrBtn.addEventListener('click', () => { ticketsInput.value = parseInt(ticketsInput.value||1)+1; recalc(); });
-decrBtn.addEventListener('click', () => { ticketsInput.value = Math.max(1, parseInt(ticketsInput.value||1)-1); recalc(); });
-ticketsInput.addEventListener('input', recalc);
-recalc();
+  // close nav with Escape
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape') closeNav();
+  });
 
-/* ====== BOOK NOW (WhatsApp) ====== */
-const bookBtn = document.getElementById('bookNow');
-bookBtn.addEventListener('click', () => {
-  const qty = parseInt(ticketsInput.value, 10) || 1;
-  const total = unitPrice * qty;
-  const message = `Hi, I want to book ${qty} ticket(s) for The Biggest Yacht Party 2025. Total: ₦${total.toLocaleString()}. Please share location and next steps.`;
-  const phone = '2349047219373'; // use country code 234 + number
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-});
+  // init
+  updateTotal();
+
+})();

@@ -1,116 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Biggest Yacht Party 2025</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>THE BIGGEST YACHT PARTY OF 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header" id="siteHeader">
-    <div class="navbar">
-      <div class="brand">
-        <span class="logo">PicnicBoat-NG</span>
-      </div>
+  <!-- Top nav / header -->
+  <header class="topbar">
+    <button class="close-btn" aria-label="close" id="closePageBtn">&times;</button>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span class="burger"></span>
+    <div class="brand">PicnicBoat LTD</div>
+
+    <div class="top-actions">
+      <button class="visit-btn" aria-label="visit"><span class="sr-only">Visit</span>🔗</button>
+      <button class="menu-btn" aria-label="open menu" id="menuBtn">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect y="1" width="20" height="2" rx="1"></rect>
+          <rect y="6" width="20" height="2" rx="1"></rect>
+          <rect y="11" width="20" height="2" rx="1"></rect>
+        </svg>
       </button>
-
-      <nav class="main-nav" id="mainNav">
-        <a href="https://picnicboat-ng.com/" class="nav-link">Visit PicnicBoat-NG</a>
-        <a href="#" class="nav-link">Event</a>
-        <a href="#" class="nav-link">Contact</a>
-      </nav>
     </div>
   </header>
 
+  <!-- Mobile nav + backdrop -->
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul>
+      <li><a href="https://picnicboat-ltd.example" target="_blank" rel="noopener">Visit Picnicboat Ltd</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-close" id="navCloseBtn" aria-label="close menu">Close</button>
+  </nav>
+
   <main class="container">
-    <!-- left big event area -->
-    <section class="event-section">
-      <div class="date-box" aria-hidden="true">
-        <div class="month">DEC</div>
-        <div class="day">31</div>
+    <!-- Event banner (replace src with your banner) -->
+    <section class="banner-card">
+      <img id="event-banner" src="./WhatsApp Image 2025-10-09 at 7.30.22 AM.jpeg" alt="Yacht Party Banner">
+    </section>
+
+    <!-- Title & CTA -->
+    <section class="title-card">
+      <h1 class="event-title">THE BIGGEST YACHT PARTY OF 2025 IS HERE!</h1>
+      <p class="subtitle">Set sail with us this December 31st and end the year in pure luxury! 🛥️✨</p>
+    </section>
+
+    <!-- Event details -->
+    <section class="details-card">
+      <div class="detail-row">
+        <div class="detail-icon">📍</div>
+        <div>
+          <div class="detail-label">Date</div>
+          <div class="detail-text">31st December 2025</div>
+        </div>
       </div>
 
-      <div class="event-card">
-        <!-- big green promo image (replace green-banner.jpg with yours) -->
-        <div class="promo">
-          <img src="./WhatsApp Image 2025-10-09 at 7.30.22 AM.jpeg" alt="Event banner (replace with your image)" />
+      <div class="detail-row">
+        <div class="detail-icon">🕗</div>
+        <div>
+          <div class="detail-label">Time</div>
+          <div class="detail-text">8PM – 10PM</div>
         </div>
+      </div>
 
-        <div class="info">
-          <h1>THE BIGGEST YACHT PARTY OF 2025 IS HERE!</h1>
-          <p class="lead">Set sail with us this December 31st and end the year in pure luxury! 🛥️✨</p>
+      <div class="detail-row">
+        <div class="detail-icon">💺</div>
+        <div>
+          <div class="detail-label">Fee</div>
+          <div class="detail-text">₦60,000 per person</div>
+        </div>
+      </div>
 
-          <ul class="features">
-            <li>🎧 Live DJ</li>
-            <li>🎷 Percussionist</li>
-            <li>🍹 Refreshments</li>
-            <li>🍹 Games & Networking</li>
-            <li>📸 Paparazzi Moments</li>
-          </ul>
-
-          <p class="meta"><strong>2 hours on water | Vibes | Networking | Unforgettable energy</strong></p>
-          <div class="event-meta-row">
-            <div><strong>Date:</strong> 31st December 2025</div>
-            <div><strong>Time:</strong> 8PM – 10PM</div>
-          </div>
+      <div class="detail-row">
+        <div class="detail-icon">📍</div>
+        <div>
+          <div class="detail-label">Location</div>
+          <div class="detail-text">Shared upon booking</div>
         </div>
       </div>
     </section>
 
-    <!-- right booking box -->
-    <aside class="booking-box">
-      <div class="countdown" aria-live="polite">
-        <div class="count-col">
-          <span id="cd-days">0</span>
-          <small>Days</small>
-        </div>
-        <div class="count-col">
-          <span id="cd-hours">0</span>
-          <small>Hours</small>
-        </div>
-        <div class="count-col">
-          <span id="cd-mins">0</span>
-          <small>Minutes</small>
-        </div>
-        <div class="count-col">
-          <span id="cd-secs">0</span>
-          <small>Seconds</small>
-        </div>
+    <!-- About text -->
+    <section class="about-card" id="contact">
+      <h2>About this event</h2>
+      <p>
+        🎧 Live DJ • 🎷 Percussionist • 🍹 Refreshments • 📸 Paparazzi Moments<br>
+        2 hours on water | Vibes | Networking | Unforgettable energy<br><br>
+        🔥 Limited slots – this will SELL OUT fast!<br>
+        📞 DM or WhatsApp <strong>09047219373</strong> to book your spot now<br>
+        📸 Follow for updates: <strong>@cruisewithjhey</strong><br><br>
+        End the year where the ocean meets the energy 🌊
+      </p>
+    </section>
+
+    <!-- Ticket selector -->
+    <section class="ticket-card">
+      <div class="ticket-left">
+        <div class="ticket-type">General Admission</div>
+        <div class="ticket-price">₦60,000 <span class="fee-note">per person</span></div>
+        <div class="ticket-desc">2 hours on water • Admits 1</div>
       </div>
 
-      <div class="booking-details">
-        <p><strong>Organised by:</strong> PicnicBoat-NG</p>
-        <p><strong>Date & Time:</strong> Sat, Dec 31, 2025 | 8PM – 10PM</p>
-        <p><strong>Location:</strong> LEKKI,Lagos - Shared upon booking</p>
-
-        <label for="tickets" class="ticket-label">Select Ticket</label>
-        <div class="ticket-control">
-          <button class="qty-btn" id="qty-decr" aria-label="Decrease">−</button>
-          <input type="number" id="tickets" min="1" value="1" />
-          <button class="qty-btn" id="qty-incr" aria-label="Increase">+</button>
+      <div class="ticket-qty">
+        <div class="qty-controls" aria-hidden="false">
+          <button class="qty-btn" id="decr" aria-label="decrease">−</button>
+          <input id="qty" type="number" inputmode="numeric" min="0" value="0" />
+          <button class="qty-btn" id="incr" aria-label="increase">+</button>
         </div>
-
-        <p class="price-line">Fee: ₦<span id="unit-price">60,000</span> per person</p>
-        <p class="total">Total: ₦<span id="total-price">60,000</span></p>
-
-        <button id="bookNow" class="book-btn">Book Now</button> 
-
-
-
-       
-
       </div>
-    </aside>
+    </section>
+
+    <div style="height: 120px"></div> <!-- spacing so content not hidden behind sticky bar -->
   </main>
 
-  <footer class="site-footer">
-    <p>🔥 Limited slots – this will SELL OUT fast!</p>
-    <p>📞 WhatsApp <strong>09047219373</strong> to book your spot</p>
-    <p>📸 Follow for updates: <strong>@cruisewithjhey</strong></p>
-  </footer>
+  <!-- Sticky bottom bar -->
+  <aside class="sticky-bar">
+    <div class="total-block">
+      <div class="total-label">₦<span id="total-amount">0</span></div>
+      <div class="small-note">Total</div>
+    </div>
+    <div class="cta-block">
+      <button id="continueBtn" class="continue-btn">Continue</button>
+    </div>
+  </aside>
 
   <script src="script.js"></script>
 </body>
