@@ -1,6 +1,6 @@
 :root{
-  --teal-500: #008B8B;
-  --teal-600: #007777;
+  --teal-500: #49c6e5;
+  --teal-600: #49c6e5;
   --bg: #ffffff;
   --muted: #7b7b7b;
   --card-radius: 14px;
@@ -119,6 +119,7 @@ body{
   width:100%;
   height:220px;
   object-fit:contain;
+ 
 }
 
 /* Title */
