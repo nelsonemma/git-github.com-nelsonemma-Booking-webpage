@@ -31,7 +31,8 @@ body{
   align-items:center;
   justify-content:space-between;
   padding:14px 16px;
-  background:#0f1720;
+  /* background:#0f1720; */
+  background: white;
   color:#fff;
   position:sticky;
   top:0;
@@ -42,6 +43,13 @@ body{
   color:var(--teal-500);
   font-size:18px;
   text-transform:capitalize;
+  display: flex;
+  justify-content: center;
+}
+
+.brand img{
+  width: 26%;
+  
 }
 .top-actions{display:flex;gap:8px;align-items:center}
 .topbar button{
@@ -104,6 +112,10 @@ body{
   padding:20px 18px;
   max-width:720px;
   margin:0 auto;
+}
+
+.instagram-media{
+  margin: 20px auto;
 }
 
 /* Banner */
